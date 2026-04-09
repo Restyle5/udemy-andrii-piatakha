@@ -1,0 +1,13 @@
+# Compiled files
+bin/
+*.class
+
+# Eclipse settings
+.settings/
+
+# Generated docs
+doc/
+
+# OS junk
+.DS_Store
+Thumbs.db
