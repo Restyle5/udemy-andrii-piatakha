@@ -38,6 +38,30 @@ public class ControlStatement {
 //            
 //            System.out.println(a.add(b));
 //        }
+		
+//		char a = 'B';
+//		
+//		switch(a) {
+//		case 'A':
+//			System.out.println("This is most defenetly A");
+//		break;
+//		
+//		case 'B', 'C':
+//			System.out.println("Its either B OR C, but right now, it is: " + a);
+//		break;
+//		
+//		default: 
+//			System.out.println("uknown");
+//		}
+		
+		
+        int min = 205;
+        int max = 369;
+
+        int randomNumber = (int)(Math.random() * (max - min + 1)) + min;
+
+        System.out.println("Random number: " + randomNumber);
+		
 
 	}
 }
