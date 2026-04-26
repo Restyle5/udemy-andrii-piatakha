@@ -1,10 +1,20 @@
 package com.itbulls.rahman;
 
+import java.util.Arrays;
+
+import enumerations.Priority;
+
 public class MethodInJava {
 
 	public static void main(String[] args) {
 		System.out.println(calcFactorial(5));
 		System.out.println(getGreatestCommonDivisor(48, 18));
+		
+		Priority priority = Priority.HIGH;
+		
+		System.out.println(priority);
+		System.out.println(priority.getPrioIndex());
+		System.out.println(Arrays.toString(Priority.values()));
 		
 
 	}
