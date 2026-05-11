@@ -12,6 +12,9 @@ public class MethodInJava {
 		
 		Priority priority = Priority.HIGH;
 		
+		String a = "Name is Queen";
+		
+		System.out.println(a);
 		System.out.println(priority);
 		System.out.println(priority.getPrioIndex());
 		System.out.println(Arrays.toString(Priority.values()));
@@ -21,7 +24,8 @@ public class MethodInJava {
 	
 	private static int calcFactorial(int number) {
 		
-		
+		String x = "sample";
+		System.out.println(x);
 		if(number > 1)
 		{
 			return number * calcFactorial(number - 1);
