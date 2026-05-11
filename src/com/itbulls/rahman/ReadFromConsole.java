@@ -1,6 +1,5 @@
 package com.itbulls.rahman;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class ReadFromConsole {
