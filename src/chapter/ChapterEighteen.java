@@ -29,6 +29,17 @@ public class ChapterEighteen implements Chapter{
 		
 		System.out.println("Executing Chapter: 18");
 		
+		List list1 = new ArrayList();
+		// generic list allows sepeficified type to be in the list.
+		List<String> genericList = new ArrayList<>();
+		
+		list1.add("Aldebaran");
+		genericList.add("Breeze");
+		
+		list1.add(1); // this is allowed in no generic list
+		
+		System.out.println(list1);
+		System.out.println(genericList);
 		
 
 	}
