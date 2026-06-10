@@ -2,30 +2,29 @@ package com.itbulls.rahman.entity;
 
 import interfaces.CarChargerInterface;
 
-public class Lambogini extends Car implements CarChargerInterface{
+public class Perodua extends Car implements CarChargerInterface{
 
-	private String model = "b13";
+	private String model;
+	
+	public Perodua(String model){
+		this.setModel(model);
+	}
+	
 	@Override
 	public String getModel() {
 		return this.model;
 	}
-	
-	public Lambogini()
-	{
-	}
-	
+
+	@Override
 	public void setModel(String model) {
 		this.model = model;
-	}
-	
-	public void getLamboModel(){
-		this.getModel();
+		
 	}
 
 	@Override
 	public String getProvider() {
-		return " LAMBO.co";
+		return "Tusk";
 		
 	}
-	
+
 }

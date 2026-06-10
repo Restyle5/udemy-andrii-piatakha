@@ -2,7 +2,9 @@ package com.itbulls.rahman.entity;
 
 public abstract class Car {
 
-	protected abstract void getModel();
+	public  abstract String getModel();
+	
+	public abstract void setModel(String model);
 	
 	public Car(){
 		System.out.println("initializing a car");
