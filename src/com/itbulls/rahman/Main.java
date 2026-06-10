@@ -9,7 +9,6 @@ import chapter.ChapterTwentyTwo;
 public class Main {
 	public static void main(String args[])
 	{
-		System.out.println("");
 //		final Chapter c = new ChapterEighteen();
 //		final Chapter c = new ChapterNineteenth();
 //		final Chapter c = new ChapterTwentyOne();
