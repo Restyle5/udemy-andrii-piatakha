@@ -11,3 +11,7 @@ doc/
 # OS junk
 .DS_Store
 Thumbs.db
+
+
+# sample csv on Cp24
+result.csv
