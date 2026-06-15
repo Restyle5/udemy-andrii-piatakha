@@ -29,7 +29,9 @@ public class ChapterTwentySix implements Chapter{
 		// section/Chapter 26;
 		// executing threat and runnable section: 
 //		ChapterTwentySix.topicThreadAndRunnable();
-		ChapterTwentySix.topicThreadScheduler();
+//		ChapterTwentySix.topicThreadScheduler();
+//		ChapterTwentySix.topicSynchronizationBasic();
+		Demo.exec();
 	}
 	
 	// 136. MultiThreading Program: Thread & Runnable
@@ -92,6 +94,41 @@ public class ChapterTwentySix implements Chapter{
 		t5.start();
 			
 	}
+	
+	// 138. Synchronization basic
+	public static void topicSynchronizationBasic()
+	{
+		
+		try {
+	
+		  Counter counter = new Counter();
+
+	        Thread ct1 = new Thread(() -> {
+	            for (int i = 0; i < 100_000; i++) {
+	                counter.increment();
+	            }
+	        });
+
+	        Thread ct2 = new Thread(() -> {
+	            for (int i = 0; i < 100_000; i++) {
+	                counter.increment();
+	            }
+	        });
+
+	        ct1.start();
+	        ct2.start();
+
+	        // Wait for both threads to finish
+	        ct1.join();
+	        ct2.join();
+
+	        System.out.println("Final count = " + counter.getCount());
+		}catch(InterruptedException e)
+		{
+			
+		}
+		
+	}
 }
 
 // External Classes: (for the sake of demo)
@@ -133,4 +170,62 @@ class PriorityDemo
 	        + Thread.currentThread().getPriority()
 	    );
 	}
+}
+
+class Counter {
+    private int count = 0;
+
+    public synchronized void increment() {
+        count++;
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+class Demo {
+    static final Object lock = new Object();
+
+    public static void exec(){
+    	
+    	try {
+
+        // 2 waiting threads
+        Thread t1 = new Thread(() -> waitTask("T1"));
+        Thread t2 = new Thread(() -> waitTask("T2"));
+
+        t1.start();
+        t2.start();
+
+        Thread.sleep(2000); // give time to start and wait
+
+        // Wake threads (try ONE of these at a time)
+
+        synchronized (lock) {
+            System.out.println("Main calling notify()");
+            lock.notify(); // wakes ONE thread
+        }
+
+        Thread.sleep(2000);
+
+        synchronized (lock) {
+            System.out.println("Main calling notifyAll()");
+            lock.notifyAll(); // wakes ALL remaining threads
+        }
+    	}catch(InterruptedException e) {
+    		e.printStackTrace();
+    	}
+    }
+
+    static void waitTask(String name) {
+        synchronized (lock) {
+            try {
+                System.out.println(name + " waiting...");
+                lock.wait();
+                System.out.println(name + " woke up!");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
