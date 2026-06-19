@@ -19,8 +19,8 @@ public class Main {
 		final Chapter c = new ChapterTwentySix();
 			
 		c.execute();
-		System.out.println(c.getChapterName());
-		System.out.println(c.getNotes());
+//		System.out.println(c.getChapterName());
+//		System.out.println(c.getNotes());
 	}
 }
 	
