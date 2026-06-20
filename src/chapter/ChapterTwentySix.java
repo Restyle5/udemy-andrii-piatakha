@@ -10,6 +10,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.IntStream;
 
 public class ChapterTwentySix implements Chapter {
 
@@ -39,7 +42,11 @@ public class ChapterTwentySix implements Chapter {
 //		ChapterTwentySix.topicSynchronizationBasic();
 //		Demo.exec();
 //		ChapterTwentySix.topicExecutorService();
-		topicCompletableFuture();
+//		topicCompletableFuture();
+//		try { System.out.println(FutureMethod.calculateAsync().get()); }catch(ExecutionException |InterruptedException e) { e.printStackTrace();}
+//		try { FutureMethod.supplyAsync(); }catch(ExecutionException | InterruptedException e) {}
+//		topicLockAPI();
+		VirtualThread();
 	}
 
 	// 136. MultiThreading Program: Thread & Runnable
@@ -194,6 +201,28 @@ public class ChapterTwentySix implements Chapter {
 			e.printStackTrace();
 		}
 	}
+	
+	// 145. LockAPI
+	public static void topicLockAPI() {
+		try {
+		var thisInstance = new LockAPI();
+		var es = Executors.newFixedThreadPool(4);
+		
+		IntStream.range(0, 10000).forEach(i -> { es.execute(thisInstance::increamentWithLock); });
+		
+		es.shutdown();
+		es.awaitTermination(3, TimeUnit.SECONDS);
+		es.shutdownNow();
+		
+		System.out.println(thisInstance.counter);
+		}catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	// 148 Virtual Thread.
+	public static void VirtualThread() {
+		try { VirtualThreadDemo.main(); } catch( InterruptedException e) {} 
+	}
 }
 
 // External Classes: (for the sake of demo)
@@ -230,7 +259,7 @@ class PriorityDemo {
 		}
 
 		System.out.println(Thread.currentThread().getName() + " priority=" + Thread.currentThread().getPriority());
-	}
+	}	
 }
 
 class Counter {
@@ -289,5 +318,86 @@ class Demo {
 				e.printStackTrace();
 			}
 		}
+	}
+}
+
+class FutureMethod
+{
+	
+	private static final double DEFAULT_PRICE = 9.99;
+	
+	public static Future<Double> calculateAsync() throws InterruptedException {
+		CompletableFuture<Double> cf = new CompletableFuture<>();
+		var es = Executors.newCachedThreadPool();
+		Future<Double> future = es.submit(()-> {
+			System.out.println("Request to server has been sent");
+			Double result = null;
+			TimeUnit.SECONDS.sleep(5);
+			return result;
+		});
+		
+		es.shutdown(); // stop thread from getting task
+		es.awaitTermination(2, TimeUnit.SECONDS); // check executor service, if its still active or not (regardless of thread or task)
+		
+		if(future.isDone()) {
+			return future;
+		}else {
+			cf.complete(DEFAULT_PRICE);
+			return cf;
+		}
+	}
+	
+	public static void supplyAsync() throws ExecutionException, InterruptedException{
+		var future = CompletableFuture.supplyAsync(()-> {
+			System.out.println("Request User ID from exeternal API");
+			return 1234;
+		}).thenApply(result ->{
+			System.out.println("Request total number of purchase in the order Service by ID..." + result);
+			return 150;
+		});
+		
+		System.out.println(future.get());
+	}
+	
+}
+
+class LockAPI{
+	
+	protected static int counter;
+	private Lock lock = new ReentrantLock();
+	
+	public void increamentWithLock() {
+		try{
+			lock.lock();
+			counter++;
+		}finally {
+			lock.unlock();
+		}
+	}
+}
+
+class VirtualThreadDemo {
+	
+	public static void main()  throws InterruptedException
+	{
+		System.out.println("Demo Virutal Thread in Java 21");
+		
+		Thread vThread = Thread.startVirtualThread(()-> {
+			System.out.println("Hello from virual Thread");
+		});
+		
+		vThread.join();
+		
+		try(ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()){
+			
+			Future<String> result = executor.submit(()-> {
+					return "Task Completed";
+			});
+			
+			System.out.println("Result: " + result.get());
+		}catch(ExecutionException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
