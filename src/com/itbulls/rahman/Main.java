@@ -3,6 +3,7 @@ package com.itbulls.rahman;
 import chapter.Chapter;
 import chapter.ChapterEighteen;
 import chapter.ChapterNineteenth;
+import chapter.ChapterTwentyEight;
 import chapter.ChapterTwentyFour;
 import chapter.ChapterTwentyOne;
 import chapter.ChapterTwentySix;
@@ -16,7 +17,8 @@ public class Main {
 //		final Chapter c = new ChapterTwentyOne();
 //		final Chapter c = new ChapterTwentyTwo();
 //		final Chapter c = new ChapterTwentyFour();
-		final Chapter c = new ChapterTwentySix();
+//		final Chapter c = new ChapterTwentySix();
+		final Chapter c = new ChapterTwentyEight();
 			
 		c.execute();
 //		System.out.println(c.getChapterName());
