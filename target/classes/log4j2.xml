@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="INFO">
 
-    <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
+     <Appenders>
+     
+       <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss} %-5level %msg%n"/>
         </Console>
-    </Appenders>
-    
-     <Appenders>
 
         <RollingFile
                 name="File"
@@ -38,9 +36,15 @@
      <Loggers>
 
         <Root level="INFO">
-            <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
         </Root>
+        
+        <!-- Specific for chapter 4 -->
+        <logger name="chapter.ChapterThirtyFour">
+        	<AppenderRef ref="File"/>
+        </logger>
 
     </Loggers>
+   
 
 </Configuration>
