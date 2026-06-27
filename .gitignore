@@ -15,3 +15,5 @@ Thumbs.db
 
 # sample csv on Cp24
 result.csv
+
+logs/*

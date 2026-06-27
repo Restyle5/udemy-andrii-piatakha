@@ -4,6 +4,7 @@ import chapter.Chapter;
 import chapter.ChapterEighteen;
 import chapter.ChapterNineteenth;
 import chapter.ChapterThirty;
+import chapter.ChapterThirtyFour;
 import chapter.ChapterThirtyTwo;
 import chapter.ChapterTwentyEight;
 import chapter.ChapterTwentyFour;
@@ -24,7 +25,7 @@ public class Main {
 //		final Chapter c = new ChapterTwentyEight();
 //		final Chapter c = new ChapterTwentyNine();
 //		final Chapter c = new ChapterThirty();
-		final Chapter c = new ChapterThirtyTwo();
+		final Chapter c = new ChapterThirtyFour();
 			
 		c.execute();
 //		System.out.println(c.getChapterName());
