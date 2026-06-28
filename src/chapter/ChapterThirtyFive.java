@@ -42,7 +42,7 @@ public class ChapterThirtyFive implements Chapter{
 	@Override
 	public void execute() {
 //		topicEstablishConnection();
-		topicTransactionStatement();
+//		topicTransactionStatement();
 		topicStatements();
 //		topicUpdateStatement();
 //		topicInsertStatement();
